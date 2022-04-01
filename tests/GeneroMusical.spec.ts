@@ -6,7 +6,7 @@ import {GeneroMusical} from '../src/GeneroMusical';
 describe('ej-PE103 class tests', () => {
     let rap:GeneroMusical = new GeneroMusical("Rap",[],[],[])
     it('A music genre is created', () => {
-        expect().to.not.equal(null);
+        expect(rap).to.not.equal(null);
     });
     
 });
