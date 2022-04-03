@@ -1,23 +1,23 @@
 import 'mocha';
 import {expect} from 'chai';
 import {GeneroMusical} from '../src/clases/GeneroMusical'; 
-import {Album} from '../src/clases/Album';
 //import {} from '../src//';
 
 describe('ej-PE103 class tests', () => {
     //let artista1:Artista
     //let artista2:Artista
     //let grupo1:Grupo
-    //let cancion1:Cancion
-    //let cancion2:Cancion
+    //let grupo2:Grupo
+    let cancion1:Cancion
+    let cancion2:Cancion
     let album1:Album = new Album("album1",artista1,2019,[],[])
     let album2:Album = new Album("album2",artista2,2013,[],[])
     let genero1:GeneroMusical = new GeneroMusical("genero1",[],[],[],[])
     let genero2:GeneroMusical = new GeneroMusical("genero2",[],[],[],[])
     
     it('the music genres are created', () => {
-        expect(album1).to.not.equal(null);
-        expect(album2).to.not.equal(null);
+        expect(cancion1).to.not.equal(null);
+        expect(cancion2).to.not.equal(null);
     });
 
     it('the music genres are created', () => {

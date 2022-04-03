@@ -1,5 +1,7 @@
+import { Album } from "./Album"
+
 export class GeneroMusical{
-    private genrename:string
+    private genreName:string
     private artistas: Artista[]
     private grupos: Grupo[]
     private albumes: Album[]
@@ -14,7 +16,7 @@ export class GeneroMusical{
      * @param can canciones que pertenecen al genero
      */
     constructor(name:string,art:Artista[],grup:Grupo[],alb:Album[],can:Cancion[]){
-        this.genrename = name
+        this.genreName = name
         this.artistas = art
         this.grupos = grup
         this.albumes = alb
@@ -26,7 +28,7 @@ export class GeneroMusical{
      * @returns el nombre del genero
      */
     getName():string{
-        return this.genrename
+        return this.genreName
     }
 
     /**
