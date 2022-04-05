@@ -1,4 +1,5 @@
 import { Album } from "./Album"
+import { Cancion } from "./Cancion"
 
 export class GeneroMusical{
     private genreName:string
@@ -19,8 +20,23 @@ export class GeneroMusical{
         this.genreName = name
         this.artistas = art
         this.grupos = grup
-        this.albumes = alb
-        this.canciones = can
+        for(let i = 0; i <= alb.length; i++){
+            for(let j = 0; j <= alb[i].getGenre().length; j++){
+                if(this.genreName == alb[i].getGenre()[j].getName()){
+                    this.albumes.push(alb[i])
+                    break
+                } 
+            }
+        }
+        //this.albumes = alb
+        for(let i = 0; i <= can.length; i++){
+            for(let j = 0; j <= can[i].getGeneros().length; j++){
+                if(this.genreName == alb[i].getGenre()[j].getName()){
+                    this.canciones.push(can[i])
+                } 
+            }
+        }
+        //this.canciones = can
     }
 
     /**
@@ -63,9 +79,47 @@ export class GeneroMusical{
         return this.canciones
     }
 
-    addArtista(art:Artista):void{}
-    addGrupo(gru:Grupo):void{}
-    addAlbum(alb:Album):void{}
-    addCancion(can:Cancion):void{}
+    //addArtista(art:Artista):void{}
+    //addGrupo(gru:Grupo):void{}
+    
+    /**
+     * metodo que añade un album a la lista del genero
+     * @param alb el album que se va a añadir
+     */
+    addAlbum(alb:Album):void{
+        for(let i:number = 0; i <= this.albumes.length;i++){
+            if(this.albumes[i].getName() == alb.getName()){
+                console.log("este album ya esta añadido a la lista del genero")
+                return
+            }
+        }
+        for(let i:number = 0; i <= alb.getGenre().length;i++){
+            if(this.genreName == alb.getGenre()[i].getName()){
+                this.albumes.push(alb)
+                return
+            }
+        }
+        console.log("el album no fue añadido porque no pertenecia a este genero")
+    }
+
+    /**
+     * metodo que añade una cancion a la lista del genero
+     * @param can la cancion que se va a añadir
+     */
+    addCancion(can:Cancion):void{
+        for(let i:number = 0; i <= this.canciones.length;i++){
+            if(this.canciones[i].getName() == can.getName()){
+                console.log("esta cancion ya esta añadida a la lista del genero")
+                return
+            }
+        }
+        for(let i:number = 0; i <= can.getGeneros().length;i++){
+            if(this.genreName == can.getGeneros()[i].getName()){
+                this.canciones.push(can)
+                return
+            }
+        }
+        console.log("la cancion no fue añadida porque no pertenecia a este genero")
+    }
 
 }

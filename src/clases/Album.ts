@@ -1,3 +1,4 @@
+import { Cancion } from "./Cancion"
 import { GeneroMusical } from "./GeneroMusical"
 
 export class Album{
@@ -20,7 +21,12 @@ export class Album{
         this.autor = au
         this.año = ye
         this.generos = gen
-        this.canciones = can
+        //this.canciones = can
+        for(let i:number = 0; i <= can.length; i++){
+            if(can[i].getSingle() == false){
+                this.canciones.push(can[i])
+            }
+        }
     }
 
     /**
