@@ -1,8 +1,8 @@
 import 'mocha';
 import {expect} from 'chai';
-import {Artista} from '../src/Artista';
-import {Grupo} from '../src/Grupo';
-import {Playlist} from '../src/Playlist';
+import {Artista} from '../src/clases/Artista';
+import {Grupo} from '../src/clases/Grupo';
+import {Playlist} from '../src/clases/Playlist';
 
 
 

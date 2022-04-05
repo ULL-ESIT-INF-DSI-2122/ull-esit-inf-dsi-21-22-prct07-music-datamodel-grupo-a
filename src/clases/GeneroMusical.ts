@@ -1,5 +1,7 @@
 import { Album } from "./Album"
 import { Cancion } from "./Cancion"
+import {Grupo} from './Grupo';
+import {Artista} from './Artista';
 
 export class GeneroMusical{
     private genreName:string

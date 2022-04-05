@@ -1,3 +1,8 @@
+import { Album } from "./Album";
+import { Artista } from "./Artista";
+import { Cancion } from "./Cancion";
+import { GeneroMusical } from "./GeneroMusical";
+
 /**
  * Clase para almacenar la información de un grupo musical
  */
@@ -11,7 +16,7 @@ export class Grupo{
      * @param albunes array que contiene los albunes lanzados por el grupo
      * @param oyentes numero de oyentes mensuales que tiene el grupo
      */
-    constructor(private nombre:string, private artistas:string[], private año:string, private generos:string[], private albunes:string[], private oyentes:number){
+    constructor(private nombre:string, private artistas:Artista[], private año:string, private generos:GeneroMusical[], private albunes:Album[], private oyentes:number){
 
     }
 
@@ -27,7 +32,7 @@ export class Grupo{
      * Getter del grupo
      * @return retorna los artistas que componen el grupo
      */
-    getArtistas():string[]{
+    getArtistas():Artista[]{
         return this.artistas;
     }
 
@@ -43,7 +48,7 @@ export class Grupo{
      * Getter de los generos
      * @return retorna los generos del grupo
      */
-    getGeneros():string[]{
+    getGeneros():GeneroMusical[]{
         return this.generos;
     }
 
@@ -51,7 +56,7 @@ export class Grupo{
      * Getter de los albunes
      * @return retorna los albunes lanzados por el grupo
      */
-    getCanciones():string[]{
+    getAlbunes():Album[]{
         return this.albunes;
     }
 

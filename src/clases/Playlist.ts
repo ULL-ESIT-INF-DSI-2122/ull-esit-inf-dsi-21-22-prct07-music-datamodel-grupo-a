@@ -1,3 +1,6 @@
+import { Cancion } from "./Cancion";
+import { GeneroMusical } from "./GeneroMusical";
+
 /**
  * Clase para almacenar la información de una playlist musical
  */
@@ -9,7 +12,7 @@ export class Playlist{
      * @param duracion duracion en horas y minutos de la playlist
      * @param generos array que contiene los generos del grupo
      */
-    constructor(private nombre:string, private canciones:string[], private duracion:number, private generos:string[]){
+    constructor(private nombre:string, private canciones:Cancion[], private duracion:number, private generos:GeneroMusical[]){
 
     }
 
@@ -25,7 +28,7 @@ export class Playlist{
      * Getter de las canciones
      * @return retorna las canciones incluidas en la playlist
      */
-    getCanciones():string[]{
+    getCanciones():Cancion[]{
         return this.canciones;
     }
 
@@ -41,7 +44,7 @@ export class Playlist{
      * Getter de los generos
      * @return retorna los generos musicales que contiene la playlist
      */
-    getGeneros():string[]{
+    getGeneros():GeneroMusical[]{
         return this.generos;
     }
 
