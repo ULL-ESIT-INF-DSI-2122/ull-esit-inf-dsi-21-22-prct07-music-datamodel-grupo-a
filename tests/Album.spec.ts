@@ -3,14 +3,16 @@ import {expect} from 'chai';
 import {GeneroMusical} from '../src/clases/GeneroMusical'; 
 import {Album} from '../src/clases/Album';
 import { Cancion } from '../src/clases/Cancion';
+import { Artista } from '../src/clases/Artista';
+import { Grupo } from '../src/clases/Grupo';
 //import {} from '../src//';
 
 describe('ej-PE103 class tests', () => {
     let genero1:GeneroMusical = new GeneroMusical("genero1",[],[],[],[])
     let genero2:GeneroMusical = new GeneroMusical("genero2",[],[],[],[])
-    //let artista1:Artista
-    //let artista2:Artista
-    //let grupo1:Grupo
+    let artista1:Artista
+    let artista2:Artista
+    let grupo1:Grupo
     let cancion1:Cancion = new Cancion("cancion1","autor1",[2,30],[genero1],false,1400)
     let cancion2:Cancion = new Cancion("cancion2","autor2",[2,30],[genero2],false,1400)
     let album1:Album = new Album("album1",artista1,2019,[genero1],[cancion1])
