@@ -5,9 +5,9 @@ import {Artista} from './Artista';
 
 export class GeneroMusical{
     /*private genreName:string
-    private artistas: string[]
-    private grupos: string[]
-    private albumes: string[]
+    private artistas: Artista[]
+    private grupos: Gupo[]
+    private albumes: Album[]
     private canciones: Cancion[]
     */
     /**

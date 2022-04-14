@@ -16,7 +16,6 @@ export class Artista{
      * @param canciones array que contiene las canciones del artista
      * @param oyentes numero de oyentes del artista
      */
-
     constructor(private nombre:string, private grupos:Grupo[], private generos:GeneroMusical[], private albunes:string[], private canciones:Cancion[], private oyentes:number){
 
     }
@@ -49,8 +48,8 @@ export class Artista{
      * Getter del año
      * @return retorna el año en que se lanzó el album
      */
-    getAlbunes():string[]{
-        return this.albunes;
+    getAlbumes():string[]{
+        return this.albumes;
     }
 
     /**

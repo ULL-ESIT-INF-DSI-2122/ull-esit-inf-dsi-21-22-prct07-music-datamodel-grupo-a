@@ -18,7 +18,7 @@ export class Cancion{
      * @param re reproducciones totales de la cancion
      */
     constructor(name:string, au:string, du: number[], ge:string[], si:boolean, re:number){
-        this.singName = name
+        this.songName = name
         this.autor = au
         if(du.length > 2){
             console.error("la duracion de la cancion tiene que estar en minutos y segundos")
