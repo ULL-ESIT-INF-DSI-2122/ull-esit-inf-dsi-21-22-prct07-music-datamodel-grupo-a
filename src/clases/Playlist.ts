@@ -67,5 +67,56 @@ export class Playlist{
         return this.generos;
     }
 
-    
+    /**
+     * setter del nombre
+     * @param name nombre nuevo de la playlist
+     */
+    setName(name:string){
+        this.nombre = name
+    }
+
+    /**
+     * 
+     * @param can 
+     * @returns 
+     */
+    addCancion(can:Cancion){
+        for(let i:number = 0; i <= this.canciones.length; i++){
+            if(this.generos[i].getName() == can.getName()){
+                console.log("La cancion ya esta añadida al artista")
+                return
+            }
+        }
+        this.canciones.push(can)
+    }
+
+    addGenero(gen:GeneroMusical){
+        for(let i:number = 0; i <= this.generos.length; i++){
+            if(this.generos[i].getName() == gen.getName()){
+                console.log("El artista ya pertenece al genero")
+                return
+            }
+        }
+        this.generos.push(gen)
+    }
+
+    delGen(gen:GeneroMusical){
+        for(let i:number = 0; i <= this.generos.length; i++){
+            if(this.generos[i].getName() == gen.getName()){
+                this.generos.splice(i,1)
+                return
+            }
+        }
+        console.log("El genero no pertenece al artista")
+    }
+
+    delCanc(can:Cancion){
+        for(let i:number = 0; i <= this.canciones.length;i++){
+            if(this.canciones[i].getName() == can.getName()){
+                this.canciones.splice(i,1)
+                return
+            }
+        }
+        console.log("No se puede borrar la cancion porque no pertenece al artista")
+    }
 }
