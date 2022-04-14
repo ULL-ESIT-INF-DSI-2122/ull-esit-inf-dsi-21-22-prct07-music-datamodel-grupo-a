@@ -4,12 +4,12 @@ import {Grupo} from './Grupo';
 import {Artista} from './Artista';
 
 export class GeneroMusical{
-    private genreName:string
-    private artistas: Artista[]
-    private grupos: Grupo[]
-    private albumes: Album[]
+   /* private genreName:string
+    private artistas: string[]
+    private grupos: string[]
+    private albumes: string[]
     private canciones: Cancion[]
-
+*/
     /**
      * constructor de la clase GeneroMusical, crea un nuevo genero comprobando que los elementos que se le pasa pertenecen a ese genero en concreto
      * @param name nombre del genero
@@ -18,8 +18,8 @@ export class GeneroMusical{
      * @param alb albumes que pertenecen al genero
      * @param can canciones que pertenecen al genero
      */
-    constructor(name:string,art:Artista[],grup:Grupo[],alb:Album[],can:Cancion[]){
-        this.genreName = name
+    constructor(private genreName:string, private artistas: string[], private grupos: string[], private albumes: string[], private canciones: Cancion[]){
+        /*this.genreName = name
         this.artistas = art
         this.grupos = grup
         for(let i = 0; i <= alb.length; i++){
@@ -38,7 +38,7 @@ export class GeneroMusical{
                 } 
             }
         }
-        //this.canciones = can
+        //this.canciones = can*/
     }
 
     /**
@@ -53,7 +53,7 @@ export class GeneroMusical{
      * getter para los artistas de un genero
      * @returns el array con los artistas de un genero
      */
-    getArtistas():Artista[]{
+    getArtistas():string[]{
         return this.artistas
     }
 
@@ -61,7 +61,7 @@ export class GeneroMusical{
      * getter para los grupos de un genero
      * @returns el array con los grupos de un genero
      */
-    getGrupos():Grupo[]{
+    getGrupos():string[]{
         return this.grupos 
     }
 
@@ -69,7 +69,7 @@ export class GeneroMusical{
      * getter para los albumes de un genero
      * @returns el array con los albumes de un genero
      */
-    getAlbumes():Album[]{
+    getAlbumes():string[]{
         return this.albumes
     }
 
@@ -88,7 +88,7 @@ export class GeneroMusical{
      * metodo que añade un album a la lista del genero
      * @param alb el album que se va a añadir
      */
-    addAlbum(alb:Album):void{
+    /*addAlbum(alb:Album):void{
         for(let i:number = 0; i <= this.albumes.length;i++){
             if(this.albumes[i].getName() == alb.getName()){
                 console.log("este album ya esta añadido a la lista del genero")
@@ -102,7 +102,7 @@ export class GeneroMusical{
             }
         }
         console.log("el album no fue añadido porque no pertenecia a este genero")
-    }
+    }*/
 
     /**
      * metodo que añade una cancion a la lista del genero
@@ -116,7 +116,7 @@ export class GeneroMusical{
             }
         }
         for(let i:number = 0; i <= can.getGeneros().length;i++){
-            if(this.genreName == can.getGeneros()[i].getName()){
+            if(this.genreName == can.getGeneros()[i]){
                 this.canciones.push(can)
                 return
             }

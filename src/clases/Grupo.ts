@@ -16,7 +16,7 @@ export class Grupo{
      * @param albunes array que contiene los albunes lanzados por el grupo
      * @param oyentes numero de oyentes mensuales que tiene el grupo
      */
-    constructor(private nombre:string, private artistas:Artista[], private año:string, private generos:GeneroMusical[], private albunes:Album[], private oyentes:number){
+    constructor(private nombre:string, private artistas:string[], private año:number, private generos:GeneroMusical[], private albunes:string[], private oyentes:number){
 
     }
 
@@ -32,7 +32,7 @@ export class Grupo{
      * Getter del grupo
      * @return retorna los artistas que componen el grupo
      */
-    getArtistas():Artista[]{
+    getArtistas():string[]{
         return this.artistas;
     }
 
@@ -40,7 +40,7 @@ export class Grupo{
      * Getter del año
      * @return retorna el año en que se lanzó el grupo
      */
-    getAño():string{
+    getAño():number{
         return this.año;
     }
 
@@ -56,7 +56,7 @@ export class Grupo{
      * Getter de los albunes
      * @return retorna los albunes lanzados por el grupo
      */
-    getAlbunes():Album[]{
+    getAlbunes():string[]{
         return this.albunes;
     }
 
