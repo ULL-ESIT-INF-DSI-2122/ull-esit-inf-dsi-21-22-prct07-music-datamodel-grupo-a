@@ -12,8 +12,27 @@ export class Playlist{
      * @param duracion duracion en horas y minutos de la playlist
      * @param generos array que contiene los generos del grupo
      */
-    constructor(private nombre:string, private canciones:Cancion[], private duracion:number, private generos:GeneroMusical[]){
+    constructor(private nombre:string, private canciones:Cancion[], private duracion:number[], private generos:GeneroMusical[]){
+        this.duracion.push(0)
+        this.duracion.push(0)
+        let seg:number 
+        for(let i:number = 0; i <= this.canciones.length; i++){
+            seg += this.canciones[i].getDuration()[1]
+            this.duracion[1] += this.canciones[i].getDuration()[0]
+            if(seg >= 60){
+                seg -= 60
+                this.duracion[1]++
+            }
+            if(this.duracion[1] >= 60){
+                this.duracion[1] -= 60
+                this.duracion[0]++
+            }
 
+        }
+        while(this.duracion[1] >= 60){
+            this.duracion[1] -= 60
+            this.duracion[0]++
+        }
     }
 
     /**
@@ -36,7 +55,7 @@ export class Playlist{
      * Getter de la duracion
      * @return retorna la duracion de la playlist
      */
-    getDuracion():number{
+    getDuracion():number[]{
         return this.duracion;
     }
 

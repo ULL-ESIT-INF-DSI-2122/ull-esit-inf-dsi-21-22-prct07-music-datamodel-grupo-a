@@ -4,12 +4,12 @@ import {Grupo} from './Grupo';
 import {Artista} from './Artista';
 
 export class GeneroMusical{
-   /* private genreName:string
+    /*private genreName:string
     private artistas: string[]
     private grupos: string[]
     private albumes: string[]
     private canciones: Cancion[]
-*/
+    */
     /**
      * constructor de la clase GeneroMusical, crea un nuevo genero comprobando que los elementos que se le pasa pertenecen a ese genero en concreto
      * @param name nombre del genero
@@ -81,8 +81,53 @@ export class GeneroMusical{
         return this.canciones
     }
 
-    //addArtista(art:Artista):void{}
-    //addGrupo(gru:Grupo):void{}
+    /**
+     * setter del nombre
+     * @param name nuevo nombre del genero musical
+     */
+    setGenNam(name:string){
+        this.genreName = name
+    }
+
+    /**
+     * metodo que añade un artista al array de artistas del genero
+     * @param art artista que va a ser añadido al genero
+     */
+    addArtista(art:Artista):void{
+        for(let i:number = 0; i <= this.artistas.length;i++){
+            if(this.artistas[i].getNombre() == art.getNombre()){
+                console.log("este artista ya esta añadido a la lista del genero")
+                return
+            }
+        }
+        for(let i = 0; i <= art.getGeneros().length; i++){
+            if(this.getName() == art.getGeneros()[i].getName()){
+                this.artistas.push(art)
+                return
+            }
+        }
+        console.log("el artista no fue añadido porque no pertenecia a este genero")
+    }
+
+    /**
+     * metodo que añade un grupo al array de grupos del genero
+     * @param gru grupo que va a ser añadido
+     */
+    addGrupo(gru:Grupo):void{
+        for(let i:number = 0; i <= this.grupos.length;i++){
+            if(this.grupos[i].getNombre() == gru.getNombre()){
+                console.log("este grupo ya esta añadido a la lista del genero")
+                return
+            }
+        }
+        for(let i = 0; i <= gru.getGeneros().length; i++){
+            if(this.getName() == gru.getGeneros()[i].getName()){
+                this.grupos.push(gru)
+                return
+            }
+        }
+        console.log("el grupo no fue añadido porque no pertenecia a este genero")
+    }
     
     /**
      * metodo que añade un album a la lista del genero
@@ -124,4 +169,59 @@ export class GeneroMusical{
         console.log("la cancion no fue añadida porque no pertenecia a este genero")
     }
 
+    /**
+     * metodo que borra del array de grupos un grupo
+     * @param gru grupo que se quiere borrar
+     */
+    delGrupo(gru:Grupo){
+        for(let i:number = 0; i <= this.grupos.length;i++){
+            if(this.grupos[i].getNombre() == gru.getNombre()){
+                this.grupos.splice(i,1)
+                return
+            }
+        }
+        console.log("No se puede borrar el grupo porque no pertenece al genero")
+    }
+
+    /**
+     * metodo que borra del array de artistas un artista
+     * @param art artista que se quiere borrar
+     */
+    delArt(art:Artista){
+        for(let i:number = 0; i <= this.artistas.length;i++){
+            if(this.artistas[i].getNombre() == art.getNombre()){
+                this.artistas.splice(i,1)
+                return
+            }
+        }
+        console.log("No se puede borrar el artista porque no pertenece al genero")
+    }
+
+    /**
+     * metodo que borra del array de canciones una cancion
+     * @param can cancion que se quiere borrar
+     */
+    delCanc(can:Cancion){
+        for(let i:number = 0; i <= this.canciones.length;i++){
+            if(this.canciones[i].getName() == can.getName()){
+                this.canciones.splice(i,1)
+                return
+            }
+        }
+        console.log("No se puede borrar la cancion porque no pertenece al genero")
+    }
+
+    /**
+     * metodo que borra del array del albumes un album
+     * @param alb album que se quiere borrar
+     */
+    delAlbum(alb:Album){
+        for(let i:number = 0; i <= this.albumes.length;i++){
+            if(this.albumes[i].getName() == alb.getName()){
+                this.albumes.splice(i,1)
+                return
+            }
+        }
+        console.log("No se puede borrar el grupo porque no pertenece al genero")
+    }
 }
