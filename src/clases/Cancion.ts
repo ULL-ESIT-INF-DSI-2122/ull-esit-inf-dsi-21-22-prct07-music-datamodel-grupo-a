@@ -4,7 +4,7 @@ export class Cancion{
     private songName: string
     private autor: string
     private duracion: number[]
-    private generos: GeneroMusical[]
+    private generos: string[]
     private single: boolean
     private reproduccionTo:number
 
@@ -17,7 +17,7 @@ export class Cancion{
      * @param si flag que permite saber si la cancion es un single
      * @param re reproducciones totales de la cancion
      */
-    constructor(name:string, au:string, du: number[], ge:GeneroMusical[], si:boolean, re:number){
+    constructor(name:string, au:string, du: number[], ge:string[], si:boolean, re:number){
         this.songName = name
         this.autor = au
         if(du.length > 2){
@@ -63,7 +63,7 @@ export class Cancion{
      * getter de los generos de la cancion
      * @returns un array con los generos que tiene una cancion
      */
-    getGeneros():GeneroMusical[]{
+    getGeneros():string[]{
         return this.generos
     }
 
