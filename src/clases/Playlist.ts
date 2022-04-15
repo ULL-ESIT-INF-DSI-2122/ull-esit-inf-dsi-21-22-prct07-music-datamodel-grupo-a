@@ -78,7 +78,6 @@ export class Playlist{
     /**
      * 
      * @param can 
-     * @returns 
      */
     addCancion(can:Cancion){
         for(let i:number = 0; i <= this.canciones.length; i++){
@@ -90,6 +89,10 @@ export class Playlist{
         this.canciones.push(can)
     }
 
+    /**
+     * 
+     * @param gen 
+     */
     addGenero(gen:GeneroMusical){
         for(let i:number = 0; i <= this.generos.length; i++){
             if(this.generos[i].getName() == gen.getName()){
@@ -100,6 +103,10 @@ export class Playlist{
         this.generos.push(gen)
     }
 
+    /**
+     * 
+     * @param gen 
+     */
     delGen(gen:GeneroMusical){
         for(let i:number = 0; i <= this.generos.length; i++){
             if(this.generos[i].getName() == gen.getName()){
@@ -110,6 +117,10 @@ export class Playlist{
         console.log("El genero no pertenece al artista")
     }
 
+    /**
+     * 
+     * @param can 
+     */
     delCanc(can:Cancion){
         for(let i:number = 0; i <= this.canciones.length;i++){
             if(this.canciones[i].getName() == can.getName()){

@@ -6,9 +6,7 @@ import { Grupo } from "./Grupo";
 import { Playlist } from "./Playlist";
 
 export class Libreria{
-    constructor(private canciones:Cancion[], private artistas:Artista[], private albumes:Album[], private grupos:Grupo[], private generosMusicales:GeneroMusical[], private playlists:Playlist[]){
-
-    }
+    constructor(private canciones:Cancion[], private artistas:Artista[], private albumes:Album[], private grupos:Grupo[], private generosMusicales:GeneroMusical[], private playlists:Playlist[]){}
     // Si asscendente es true es en orden ascendente, si no descendiente
     imprimirCancionesAlfabeticamente(ascendente:boolean){
         this.canciones.sort(function(a:Cancion,b:Cancion):number {
@@ -389,5 +387,18 @@ export class Libreria{
             
         }
         return undefined;
+    }
+
+    getPlaylists():Playlist[]{
+        return this.playlists
+    }
+
+    getPlaylist(playlist:string):Playlist|undefined{
+        for(let i:number = 0; i <= this.playlists.length; i++){
+            if(this.playlists[i].getNombre() == playlist){
+                return this.playlists[i]
+            }
+        }
+        return undefined
     }
 }

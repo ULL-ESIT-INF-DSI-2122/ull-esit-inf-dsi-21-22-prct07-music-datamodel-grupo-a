@@ -1,4 +1,3 @@
-import { Album } from './Album';
 import { Cancion } from './Cancion';
 import { GeneroMusical } from './GeneroMusical';
 import {Grupo} from './Grupo';
@@ -16,9 +15,7 @@ export class Artista{
      * @param canciones array que contiene las canciones del artista
      * @param oyentes numero de oyentes del artista
      */
-    constructor(private nombre:string, private grupos:Grupo[], private generos:GeneroMusical[], private albunes:string[], private canciones:Cancion[], private oyentes:number){
-
-    }
+    constructor(private nombre:string, private grupos:Grupo[], private generos:GeneroMusical[], private albumes:string[], private canciones:Cancion[], private oyentes:number){}
 
     /**
      * Getter del nombre
@@ -108,9 +105,9 @@ export class Artista{
      * metodo que añade un album al array de albumes
      * @param alb album que se va a añadir
      */
-    addAlbum(alb:Album){
+    addAlbum(alb:string){
         for(let i:number = 0; i <= this.albumes.length; i++){
-            if(this.albumes[i].getName() == alb.getName()){
+            if(this.albumes[i] == alb){
                 console.log("El album ya esta añadido al artista")
                 return
             }
@@ -178,9 +175,9 @@ export class Artista{
      * metodo que borra un album del array de albumes
      * @param alb album que se va a borrar
      */
-    delAlbum(alb:Album){
+    delAlbum(alb:string){
         for(let i:number = 0; i <= this.albumes.length;i++){
-            if(this.albumes[i].getName() == alb.getName()){
+            if(this.albumes[i] == alb){
                 this.albumes.splice(i,1)
                 return
             }

@@ -1,5 +1,3 @@
-import { GeneroMusical } from "./GeneroMusical"
-
 export class Cancion{
     private songName: string
     private autor: string
@@ -120,9 +118,9 @@ export class Cancion{
      * metodo que añade un genero musical al array de generos
      * @param gen genero que se va a añadir
      */
-    addGen(gen:GeneroMusical){
+    addGen(gen:string){
         for(let i:number = 0; i <= this.generos.length; i++){
-            if(this.generos[i].getName() == gen.getName()){
+            if(this.generos[i] == gen){
                 console.log("La cancion ya pertenece al genero")
                 return
             }
@@ -134,9 +132,9 @@ export class Cancion{
      * metodo que borra un genero musical del array de generos
      * @param gen genero que se va a borrar
      */
-    delGen(gen:GeneroMusical){
+    delGen(gen:string){
         for(let i:number = 0; i <= this.generos.length; i++){
-            if(this.generos[i].getName() == gen.getName()){
+            if(this.generos[i] == gen){
                 this.generos.splice(i,1)
                 return
             }
