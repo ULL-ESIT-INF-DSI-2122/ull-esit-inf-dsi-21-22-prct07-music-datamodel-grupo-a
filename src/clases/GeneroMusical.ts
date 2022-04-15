@@ -100,6 +100,7 @@ export class GeneroMusical{
             }
         }
         console.log("el grupo no fue añadido porque no pertenecia a este genero")
+
     }
     
     /**

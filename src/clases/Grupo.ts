@@ -100,9 +100,9 @@ export class Grupo{
      * 
      * @param art 
      */
-    delArt(art:Artista){
+    delArt(art:string){
         for(let i:number = 0; i <= this.artistas.length;i++){
-            if(this.artistas[i] == art.getNombre()){
+            if(this.artistas[i] == art){
                 this.artistas.splice(i,1)
                 return
             }
@@ -142,23 +142,23 @@ export class Grupo{
      * 
      * @param alb 
      */
-    addAlbum(alb:Album){
+    addAlbum(alb:string){
         for(let i:number = 0; i <= this.albumes.length; i++){
-            if(this.albumes[i] == alb.getName()){
+            if(this.albumes[i] == alb){
                 console.log("El album ya esta añadido al grupo")
                 return
             }
         }
-        this.albumes.push(alb.getName())
+        this.albumes.push(alb)
     }
 
     /**
      * 
      * @param alb 
      */
-    delAlbum(alb:Album){
+    delAlbum(alb:string){
         for(let i:number = 0; i <= this.albumes.length;i++){
-            if(this.albumes[i] == alb.getName()){
+            if(this.albumes[i] == alb){
                 this.albumes.splice(i,1)
                 return
             }
