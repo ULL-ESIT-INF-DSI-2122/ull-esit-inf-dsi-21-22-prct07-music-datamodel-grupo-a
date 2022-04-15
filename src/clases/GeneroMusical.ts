@@ -93,19 +93,14 @@ export class GeneroMusical{
      * metodo que añade un artista al array de artistas del genero
      * @param art artista que va a ser añadido al genero
      */
-    addArtista(art:Artista):void{
+    addArtista(art:string):void{
         for(let i:number = 0; i <= this.artistas.length;i++){
-            if(this.artistas[i].getNombre() == art.getNombre()){
+            if(this.artistas[i] == art){
                 console.log("este artista ya esta añadido a la lista del genero")
                 return
             }
         }
-        for(let i = 0; i <= art.getGeneros().length; i++){
-            if(this.getName() == art.getGeneros()[i].getName()){
-                this.artistas.push(art)
-                return
-            }
-        }
+        this.artistas.push(art)
         console.log("el artista no fue añadido porque no pertenecia a este genero")
     }
 
@@ -113,20 +108,15 @@ export class GeneroMusical{
      * metodo que añade un grupo al array de grupos del genero
      * @param gru grupo que va a ser añadido
      */
-    addGrupo(gru:Grupo):void{
+    addGrupo(gru:string):void{
         for(let i:number = 0; i <= this.grupos.length;i++){
-            if(this.grupos[i].getNombre() == gru.getNombre()){
+            if(this.grupos[i] == gru){
                 console.log("este grupo ya esta añadido a la lista del genero")
                 return
             }
         }
-        for(let i = 0; i <= gru.getGeneros().length; i++){
-            if(this.getName() == gru.getGeneros()[i].getName()){
-                this.grupos.push(gru)
-                return
-            }
-        }
-        console.log("el grupo no fue añadido porque no pertenecia a este genero")
+        this.grupos.push(gru)
+        
     }
     
     /**
@@ -173,9 +163,9 @@ export class GeneroMusical{
      * metodo que borra del array de grupos un grupo
      * @param gru grupo que se quiere borrar
      */
-    delGrupo(gru:Grupo){
+    delGrupo(gru:string){
         for(let i:number = 0; i <= this.grupos.length;i++){
-            if(this.grupos[i].getNombre() == gru.getNombre()){
+            if(this.grupos[i] == gru){
                 this.grupos.splice(i,1)
                 return
             }
@@ -187,9 +177,9 @@ export class GeneroMusical{
      * metodo que borra del array de artistas un artista
      * @param art artista que se quiere borrar
      */
-    delArt(art:Artista){
+    delArt(art:string){
         for(let i:number = 0; i <= this.artistas.length;i++){
-            if(this.artistas[i].getNombre() == art.getNombre()){
+            if(this.artistas[i] == art){
                 this.artistas.splice(i,1)
                 return
             }
@@ -215,9 +205,9 @@ export class GeneroMusical{
      * metodo que borra del array del albumes un album
      * @param alb album que se quiere borrar
      */
-    delAlbum(alb:Album){
+    delAlbum(alb:string){
         for(let i:number = 0; i <= this.albumes.length;i++){
-            if(this.albumes[i].getName() == alb.getName()){
+            if(this.albumes[i] == alb){
                 this.albumes.splice(i,1)
                 return
             }
