@@ -1,6 +1,7 @@
 import * as inquirer from 'inquirer'
 import { Libreria } from './clases/Libreria';
 import { Cancion } from './clases/Cancion';
+import { Playlist } from './clases/Playlist';
 
 export class Gestor{
     biblioteca:Libreria
@@ -125,7 +126,7 @@ export class Gestor{
         console.table(this.biblioteca.getPlaylist(play).getCanciones());
     }
 
-    add
+    addPlaylist(play:Playlist){}
     prompUser():void{}
 
 }
