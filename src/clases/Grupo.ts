@@ -80,7 +80,7 @@ export class Grupo{
      * setter del año de creacion del grupo
      * @param nam nuevo año de creacion
      */
-    setAño(año:string){
+    setAño(año:number){
         this.año = año
     }
 
@@ -90,7 +90,7 @@ export class Grupo{
      */
     addArt(art:Artista){
         for(let i:number = 0; i <= this.artistas.length; i++){
-            if(this.artistas[i].getNombre() == art.getNombre()){
+            if(this.artistas[i] == art){
                 console.log("El artista ya perteneces al grupo")
                 return
             }
@@ -102,9 +102,9 @@ export class Grupo{
      * 
      * @param art 
      */
-    delArt(art:Artista){
+    delArt(art:string){
         for(let i:number = 0; i <= this.artistas.length;i++){
-            if(this.artistas[i].getNombre() == art.getNombre()){
+            if(this.artistas[i] == art){
                 this.artistas.splice(i,1)
                 return
             }
@@ -144,9 +144,9 @@ export class Grupo{
      * 
      * @param alb 
      */
-    addAlbum(alb:Album){
+    addAlbum(alb:stting){
         for(let i:number = 0; i <= this.albumes.length; i++){
-            if(this.albumes[i].getName() == alb.getName()){
+            if(this.albumes[i] == alb){
                 console.log("El album ya esta añadido al grupo")
                 return
             }
@@ -158,9 +158,9 @@ export class Grupo{
      * 
      * @param alb 
      */
-    delAlbum(alb:Album){
+    delAlbum(alb:string){
         for(let i:number = 0; i <= this.albumes.length;i++){
-            if(this.albumes[i].getName() == alb.getName()){
+            if(this.albumes[i] == alb){
                 this.albumes.splice(i,1)
                 return
             }
