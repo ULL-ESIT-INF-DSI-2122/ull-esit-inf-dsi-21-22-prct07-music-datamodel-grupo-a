@@ -2,7 +2,6 @@ import * as inquirer from 'inquirer'
 import { Libreria } from './clases/Libreria';
 import { Cancion } from './clases/Cancion';
 import { Playlist } from './clases/Playlist';
-
 export class Gestor{
     biblioteca:Libreria
 
@@ -126,7 +125,23 @@ export class Gestor{
         console.table(this.biblioteca.getPlaylist(play).getCanciones());
     }
 
-    addPlaylist(play:Playlist){}
+    addPlaylist(play:Playlist = new Playlist("",[],[],[],""),crea?:string,nom?:string){    
+        if(this.biblioteca.getPlaylist(play.getNombre()).getNombre() !== undefined){
+            this.biblioteca.addPlaylist(new Playlist(nom,this.biblioteca.getPlaylist(play.getNombre()).getCanciones(),this.biblioteca.getPlaylist(play.getNombre()).getDuracion(),this.biblioteca.getPlaylist(play.getNombre()).getGeneros(),crea))
+        }
+        else{
+            this.biblioteca.addPlaylist(play)
+        }
+    }
+
+    removePlaylist(play:string,creador:string){
+        if(this.biblioteca.getPlaylist(play).getCreador() == creador){
+            this.biblioteca.rmPlaylist(play)
+        }
+        else{
+            console.log("no puedes borrar esa playlist, no eres su creador")
+        }
+    }
     prompUser():void{}
 
-}
+} 

@@ -12,7 +12,7 @@ export class Playlist{
      * @param duracion duracion en horas y minutos de la playlist
      * @param generos array que contiene los generos del grupo
      */
-    constructor(private nombre:string, private canciones:Cancion[], private duracion:number[], private generos:GeneroMusical[]){
+    constructor(private nombre:string, private canciones:Cancion[], private duracion:number[], private generos:GeneroMusical[], private creador:string){
         this.duracion.push(0)
         this.duracion.push(0)
         let seg:number 
@@ -66,7 +66,21 @@ export class Playlist{
     getGeneros():GeneroMusical[]{
         return this.generos;
     }
+    /**
+     * 
+     * @returns 
+     */
+    getCreador():string{
+        return this.creador
+    }
 
+    getReproducciones():number{
+        let result = 0
+        this.canciones.forEach(cancion => {
+            result += cancion.getRepro()
+        });
+        return result
+    }
     /**
      * setter del nombre
      * @param name nombre nuevo de la playlist

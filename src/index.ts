@@ -1,9 +1,11 @@
+import * as inquirer from 'inquirer';
 import { Album } from "./clases/Album";
 import { Artista } from "./clases/Artista";
 import { Cancion } from "./clases/Cancion";
 import { GeneroMusical } from "./clases/GeneroMusical";
 import { Grupo } from "./clases/Grupo";
-import inquirer from "inquirer";
+import { Libreria } from './clases/Libreria';
+import { Playlist } from './clases/Playlist';
 
 //Canciones
 let PullingTeeth: Cancion = new Cancion("Pulling Teeth", "Cliff Burton", [4,39], ["Rock"], false, 3221852);
@@ -24,10 +26,10 @@ let KillEmAll:Album = new Album("Kill Em All", metallica, 1983,[Rock], [PullingT
 
 
 //funciones
-
+let libreria:Libreria = new Libreria([],[],[],[],[],[])
 
 //Parte del menú
-enum Comands {
+enum Commands {
     addElemento = "Añadir un género, canción, album, grupo u artista",
     rmElemento = "Eliminar un género, canción, album, grupo u artista",
     modifyElemento = "Modificar un género, canción, album, grupo u artista",
@@ -35,73 +37,73 @@ enum Comands {
     imprimirCancionGrupo = "Imprimir canciones pertenecientes a un grupo",
     imprimirAlbumArtista = "Imprimir Albumes pertenecientes a un artista",
     imprimirAlbumGrupo = "Imprimir Albumes pertenecientes a un grupo",
-    imprimirPlaylistArtista = "Imprimir Playlists pertenecientes a un artista",
-    imprimirPlaylistGrupo = "Imprimir Playlists pertenecientes a un grupo",
-    imprimirCancionAlfabeticamente = "Imprimir canciones alfabeticametne",
-    imprimirAlbumAlfabeticamente = "Imprimir albumes alfabeticametne",
-    imprimirPlaylistAlfabeticamente = "Imprimir canciones alfabeticametne",
-    imprimirAlbumPorAño = "Imprimir album por año de lanzamiento",
-    imprimirCancionesReproducciones = "Imprimir canciones por numerod e reproducciones",
-    imprimirSingles = "Imprimir únicamente las canciones que son singles",
     Quit = "Salir"
 }
+function promptPlGru():void{
+    let playlist: Playlist[] = []
+    console.clear()
+    var inquirer = require('inquirer')
+    inquirer.prompt({type: "input", name: "grupo", message:"Nombre del grupo"})
+        .then(answers => {
+            playlist = libreria.BuscarPlaylistPorArtista(answers)
+            inquirer.prompt({   type: "list",
+                            name: "orden", 
+                            message: "¿Como quieres ordenar la Playlist?",
+                            choices:[
+                            {name:"Alfabetico", value:"a"},
+                            {name:"Genero", value:"g"},
+                            {name:"Reproducciones", value: "r"}
+                            ],
+                        })
+                        .then(answers => {switch(answers){
+                                case "a":
+                                 inquirer.prompt({type:})   
+                            }
+                        })
+        })
+    promptUser()
+}
+
 
 async function promptUser() {
     console.clear();
 
     const answers = await inquirer.prompt({
-        type: 'list',
-        name: 'comand',
-        message: 'Elige una opción', 
-        choises: Object.values(Comands)
+        type: "list",
+        name: "comand",
+        message: "Elige una opción", 
+        choises: Object.values(Commands)
     });
 
     switch (answers["comand"]) {
-        case Comands.addElemento:
-            
+        case Commands.addElemento:
+            promptAdd();
+            promptUser();
             break;
-        case Comands.rmElemento:
-            
+        case Commands.rmElemento:
+            promptRm();
+            promptUser();
             break;
-        case Comands.modifyElemento:
-            
+        case Commands.modifyElemento:
+            promptMd();
+            promptUser();
             break;
-        case Comands.imprimirCancionArtista:
-            
+        case Commands.imprimirCancionArtista:
+            promptCaArt();
+            promptUser();
             break;
-        case Comands.imprimirCancionGrupo:
-            
+        case Commands.imprimirCancionGrupo:
+            promptCaGru();
+            promptUser();
             break;
-        case Comands.imprimirAlbumArtista:
-            
+        case Commands.imprimirAlbumArtista:
+            promptAlArt();
+            promptUser();
             break;
-        case Comands.imprimirAlbumGrupo:
-            
-            break;
-        case Comands.imprimirPlaylistArtista:
-            
-            break;
-        case Comands.imprimirPlaylistGrupo:
-            
-            break;
-        case Comands.imprimirCancionAlfabeticamente:
-            
-            break;
-        case Comands.imprimirAlbumAlfabeticamente:
-            
-            break;
-        case Comands.imprimirPlaylistAlfabeticamente:
-            
-            break;
-        case Comands.imprimirAlbumPorAño:
-            
-            break;
-        case Comands.imprimirCancionesReproducciones:
-            
-            break;  
-        case Comands.imprimirSingles:
-            
-            break;   
+        case Commands.imprimirAlbumGrupo:
+            promptAlGru();
+            promptUser();
+            break; 
         default:
             break;
     }

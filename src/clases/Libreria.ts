@@ -7,9 +7,45 @@ import { Playlist } from "./Playlist";
 
 export class Libreria{
     constructor(private canciones:Cancion[], private artistas:Artista[], private albumes:Album[], private grupos:Grupo[], private generosMusicales:GeneroMusical[], private playlists:Playlist[]){}
-    // Si asscendente es true es en orden ascendente, si no descendiente
-    imprimirCancionesAlfabeticamente(ascendente:boolean){
-        this.canciones.sort(function(a:Cancion,b:Cancion):number {
+    
+    BuscarCancionesdeAutor(artista:string):Cancion[]{
+        let sol:Cancion[] = [];
+        
+        for(let i:number = 0; i <= this.canciones.length;i++){
+            if(this.canciones[i].getAutor() == artista){
+                sol.push(this.canciones[i]);
+            }
+            
+        }
+        return sol
+    }
+
+    BuscarAlbumesPorArtista(artista:string):Album[]{
+        let sol:Album[] = [];
+        
+        for(let i:number = 0; i <= this.albumes.length;i++){
+            if(this.albumes[i].getAutor().getNombre() == artista){
+                sol.push(this.albumes[i]);
+            }
+            
+        }
+        return sol
+    }
+
+    BuscarPlaylistPorArtista(artista:string):Playlist[]{
+        let sol:Playlist[] = [];
+        
+        for(let i:number = 0; i <= this.playlists.length;i++){
+            if(this.playlists[i].getCanciones().find(item => item.getAutor() === artista) != undefined){
+                sol.push(this.playlists[i]);
+            }
+            
+        }
+        return sol
+    }
+
+    imprimirCancionesAlfabeticamente(canciones:Cancion[],ascendente:boolean){
+        canciones.sort(function(a:Cancion,b:Cancion):number {
             if(ascendente){
                 if(a.getName() > b.getName()){
                     return 1;
@@ -33,8 +69,8 @@ export class Libreria{
         console.table(this.canciones);
     }
 
-    imprimirCancionesPorReproducciones(ascendente:boolean){
-        this.canciones.sort(function(a:Cancion,b:Cancion):number {
+    imprimirCancionesPorReproducciones(canciones:Cancion[],ascendente:boolean){
+        canciones.sort(function(a:Cancion,b:Cancion):number {
             if(ascendente){
                 return a.getRepro() - b.getRepro();
                 
@@ -48,12 +84,12 @@ export class Libreria{
         console.table(this.canciones);
     }
 
-    imprimirSingles(){
+    imprimirSingles(canciones:Cancion[]){
         let sol:Cancion[] = [];
         
-        for(let i:number = 0; i <= this.canciones.length;i++){
-            if(this.canciones[i].getSingle()){
-                sol.push(this.canciones[i]);
+        for(let i:number = 0; i <= canciones.length;i++){
+            if(canciones[i].getSingle()){
+                sol.push(canciones[i]);
             }
             
         }
@@ -61,25 +97,13 @@ export class Libreria{
         console.table(sol);
     }
 
-    imprimirCancionesdeArtista(artista:string){
-        let sol:Cancion[] = [];
-        
-        for(let i:number = 0; i <= this.canciones.length;i++){
-            if(this.canciones[i].getAutor() == artista){
-                sol.push(this.canciones[i]);
-            }
-            
-        }
-        console.log("Las Canciones del Artista " + artista + " son:");
-        console.table(sol);
-    }
 
-    imprimirCancionesPorGenero(genero:string){
+    imprimirCancionesPorGenero(canciones:Cancion[],genero:string){
         let sol:Cancion[] = [];
         
-        for(let i:number = 0; i <= this.canciones.length;i++){
-            if(this.canciones[i].getGeneros().find(item => item === genero) != undefined ){
-                sol.push(this.canciones[i]);
+        for(let i:number = 0; i <= canciones.length;i++){
+            if(canciones[i].getGeneros().find(item => item === genero) != undefined ){
+                sol.push(canciones[i]);
             }
             
         }
@@ -87,8 +111,8 @@ export class Libreria{
         console.table(sol);
     }
     
-    imprimirAlbumesAlfabeticamente(ascendente:boolean){
-        this.albumes.sort(function(a:Album,b:Album):number {
+    imprimirAlbumesAlfabeticamente(albumes:Album[],ascendente:boolean){
+        albumes.sort(function(a:Album,b:Album):number {
             if(ascendente){
                 if(a.getName() > b.getName()){
                     return 1;
@@ -112,8 +136,8 @@ export class Libreria{
         console.table(this.albumes);
     }
 
-    imprimirAlbumesPorAño(ascendente:boolean){
-        this.albumes.sort(function(a:Album,b:Album):number {
+    imprimirAlbumesPorAño(albumes:Album[],ascendente:boolean){
+        albumes.sort(function(a:Album,b:Album):number {
             if(ascendente){
                 return a.getYear() - b.getYear();
             }else{
@@ -122,20 +146,7 @@ export class Libreria{
         });
 
         console.log("Los Albumes ordenadas por año de lanzamiento son:");
-        console.table(this.albumes);
-    }
-
-    iprimirAlbumesPorArtista(artista:string){
-        let sol:Album[] = [];
-        
-        for(let i:number = 0; i <= this.albumes.length;i++){
-            if(this.albumes[i].getAutor().getNombre() == artista){
-                sol.push(this.albumes[i]);
-            }
-            
-        }
-        console.log("Las Canciones del Artista " + artista + " son:");
-        console.table(sol);
+        console.table(albumes);
     }
 
     imprimirAlbumesPorGenero(genero:GeneroMusical){
@@ -151,8 +162,8 @@ export class Libreria{
         console.table(sol);
     }
 
-    imprimirPlaylistAlfabeticamente(ascendente:boolean){
-        this.playlists.sort(function(a:Playlist,b:Playlist):number {
+    imprimirPlaylistAlfabeticamente(playlists:Playlist[],ascendente:boolean){
+        playlists.sort(function(a:Playlist,b:Playlist):number {
             if(ascendente){
                 if(a.getNombre() > b.getNombre()){
                     return 1;
@@ -176,25 +187,12 @@ export class Libreria{
         console.table(this.playlists);
     }
 
-    iprimirPlaylistPorArtista(artista:string){
+    imprimirPlaylistPorGenero(playlists:Playlist[],genero:GeneroMusical){
         let sol:Playlist[] = [];
         
-        for(let i:number = 0; i <= this.playlists.length;i++){
-            if(this.playlists[i].getCanciones().find(item => item.getAutor() === artista) != undefined){
-                sol.push(this.playlists[i]);
-            }
-            
-        }
-        console.log("Las Playlist del Artista " + artista + " son:");
-        console.table(sol);
-    }
-
-    imprimirPlaylistPorGenero(genero:GeneroMusical){
-        let sol:Playlist[] = [];
-        
-        for(let i:number = 0; i <= this.playlists.length;i++){
-            if(this.playlists[i].getGeneros().find(item => item === genero) != undefined ){
-                sol.push(this.playlists[i]);
+        for(let i:number = 0; i <= playlists.length;i++){
+            if(playlists[i].getGeneros().find(item => item === genero) != undefined ){
+                sol.push(playlists[i]);
             }
             
         }
@@ -202,7 +200,20 @@ export class Libreria{
         console.table(sol);
     }
 
-    
+    imprimirPlaylistPorReproducciones(playlist:Playlist[],ascendente:boolean){
+        playlist.sort(function(a:Playlist,b:Playlist):number {
+            if(ascendente){
+                return a.getReproducciones() - b.getReproducciones();
+                
+            }else{
+                return b.getReproducciones() - a.getReproducciones();
+                
+            }
+        });
+
+        console.log("Las Canciones ordenadas por numero de reproducciones son:");
+        console.table(this.canciones);
+    }
 
     addCancion(cancion:Cancion){
         //Comprobar que la cancion no existe
@@ -227,6 +238,18 @@ export class Libreria{
         }
 
         this.generosMusicales.push(genero);
+    }
+
+    addPlaylist(play:Playlist){
+        for(let i:number = 0; i <= this.generosMusicales.length;i++){
+            if(this.playlists[i].getNombre() == play.getNombre()){
+                console.log("este genero ya esta añadida a la lista del genero")
+                return
+            }
+            
+        }
+
+        this.playlists.push(play);
     }
 
     addArtista(artista:Artista){
@@ -333,6 +356,15 @@ export class Libreria{
             
         }
         this.grupos = sol;
+    }
+
+    rmPlaylist(play:string){
+        for(let i:number = 0; i <= this.playlists.length; i++){
+            if(this.playlists[i].getNombre() == play){
+                this.playlists.splice(i,1)
+            }
+        }
+        console.log("no existe esa playlist en la biblioteca")
     }
 
     getCancion(cancion:string):Cancion|undefined{
