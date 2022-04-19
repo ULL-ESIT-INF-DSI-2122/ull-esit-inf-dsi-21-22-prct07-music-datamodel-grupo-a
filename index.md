@@ -390,4 +390,365 @@ Los grupos serán otra entidad dentro del sistema. Esta entidad deberá contener
 6. Cantidad de oyentes mensuales.
 Nota: Recuerde que tanto los artistas como los álbumes pueden estar asociados a más de un género. Incluso las canciones pueden ser fusiones de uno o más géneros.
 
-En el grupo el nombre es una string, y todos los demas atributos salvo los oyentes(que es un number) son arrays de strings. En esta clase tenemos getters, setters y dos metodos que añaden y dos que borran elemntos de estos arrays, 
+En el grupo el nombre es una string, y todos los demas atributos salvo los oyentes(que es un number) son arrays de strings. En esta clase tenemos getters, setters y dos metodos que añaden y dos que borran elemntos de estos arrays, y aparte de todo esto un metodo que añade oyentes a los oyentes mensuales que tiene el grupo.
+
+```Typescript
+class Grupo{
+
+    constructor(private nombre:string, private artistas:string[], private año:number, private generos:GeneroMusical[], private albumes:string[], private oyentes:number){}
+
+    getNombre():string{
+        return this.nombre;
+    }
+
+    getArtistas():string[]{
+        return this.artistas;
+    }
+
+    getAño():number{
+        return this.año;
+    }
+
+    getGeneros():GeneroMusical[]{
+        return this.generos;
+    }
+
+    getAlbumes():string[]{
+        return this.albumes;
+    }
+
+    getOyentes():number{
+        return this.oyentes;
+    }
+
+    setNom(nom:string){
+        this.nombre = nom
+    }
+
+    setAño(año:number){
+        this.año = año
+    }
+
+    addArt(art:Artista){
+        for(let i:number = 0; i <= this.artistas.length; i++){
+            if(this.artistas[i] == art.getNombre()){
+                console.log("El artista ya perteneces al grupo")
+                return
+            }
+        }
+        this.artistas.push(art.getNombre())
+    }
+    
+    delArt(art:string){
+        for(let i:number = 0; i <= this.artistas.length;i++){
+            if(this.artistas[i] == art){
+                this.artistas.splice(i,1)
+                return
+            }
+        }
+        console.log("No se puede borrar el artista porque no pertenece al grupo")
+    }
+
+    addGen(gen:GeneroMusical){
+        for(let i:number = 0; i <= this.generos.length; i++){
+            if(this.generos[i].getName() == gen.getName()){
+                console.log("El genero ya esta añadido al grupo")
+                return
+            }
+        }
+        this.generos.push(gen)
+    }
+
+    delGen(gen:GeneroMusical){
+        for(let i:number = 0; i <= this.generos.length; i++){
+            if(this.generos[i].getName() == gen.getName()){
+                this.generos.splice(i,1)
+                return
+            }
+        }
+        console.log("El genero no pertenece al grupo")
+    }
+
+    addAlbum(alb:string){
+        for(let i:number = 0; i <= this.albumes.length; i++){
+            if(this.albumes[i] == alb){
+                console.log("El album ya esta añadido al grupo")
+                return
+            }
+        }
+        this.albumes.push(alb)
+    }
+
+    delAlbum(alb:string){
+        for(let i:number = 0; i <= this.albumes.length;i++){
+            if(this.albumes[i] == alb){
+                this.albumes.splice(i,1)
+                return
+            }
+        }
+        console.log("No se puede borrar el grupo porque no pertenece al genero")
+    }
+
+    addOye(oye:number){
+        this.oyentes += oye
+    }
+
+    setOye(oye:number){
+        this.oyentes = oye
+    }
+}
+```
+
+### Artista - Clase desarrollada por Daniel Arbelo y Carlos Pío Reyes
+
+Los artistas son una entidad separada a los grupos dentro del sistema. Con esta decisión, podemos identifcar artistas que forman parte de grupos y que además tienen carreras en solitario o que están en varios grupos.
+
+1. Nombre del artista.
+2. Grupos a los que pertenece.
+3. Género(s) músicales relacionados.
+4. Álbumes en los que ha participado.
+5. Canciones publicadas.
+6. Cantidad de oyentes mensuales. La cantidad de oyentes mensuales de un artista es la suma de los oyentes mensuales de todos los grupos en los que ha participado más su propio trabajo individual (si existe).
+
+En esta clase lo más destacable es que los grupos a los que pertenece y los géneros músicales relacionados son arrays de las clases GeneroMusical y Grupo respectivamente, de resto la clase es similar a las otras con métodos similares para la modificación de los atributos de la misma.
+
+```Typescript
+class Artista{
+
+    constructor(private nombre:string, private grupos:Grupo[], private generos:GeneroMusical[], private albumes:string[], private canciones:Cancion[], private oyentes:number){}
+
+    getNombre():string{
+        return this.nombre;
+    }
+
+    getGrupo():Grupo[]{
+        return this.grupos;
+    }
+
+    getGeneros():GeneroMusical[]{
+        return this.generos;
+    }
+
+    getAlbumes():string[]{
+        return this.albumes;
+    }
+
+    getCanciones():Cancion[]{
+        return this.canciones;
+    }
+
+    getOyentes():number{
+        return this.oyentes
+    }
+
+    setNombre(nam:string){
+        this.nombre = nam
+    }
+
+    addGrupo(gru:Grupo){
+        for(let i:number = 0; i <= this.grupos.length; i++){
+            if(this.grupos[i].getNombre() == gru.getNombre()){
+                console.log("El artista ya pertenece al grupo")
+                return
+            }
+        }
+        this.grupos.push(gru)
+    }
+
+    addGen(gen:GeneroMusical){
+        for(let i:number = 0; i <= this.generos.length; i++){
+            if(this.generos[i].getName() == gen.getName()){
+                console.log("El artista ya pertenece al genero")
+                return
+            }
+        }
+        this.generos.push(gen)
+    }
+
+    addAlbum(alb:string){
+        for(let i:number = 0; i <= this.albumes.length; i++){
+            if(this.albumes[i] == alb){
+                console.log("El album ya esta añadido al artista")
+                return
+            }
+        }
+        this.albumes.push(alb)
+    }
+
+    addCanc(can:Cancion){
+        for(let i:number = 0; i <= this.canciones.length; i++){
+            if(this.generos[i].getName() == can.getName()){
+                console.log("La cancion ya esta añadida al artista")
+                return
+            }
+        }
+        this.canciones.push(can)
+    }
+
+    delGrupo(gru:Grupo){
+        for(let i:number = 0; i <= this.grupos.length;i++){
+            if(this.grupos[i].getNombre() == gru.getNombre()){
+                this.grupos.splice(i,1)
+                return
+            }
+        }
+        console.log("No se puede borrar el grupo porque no pertenece al artista")
+    }
+
+    delGen(gen:GeneroMusical){
+        for(let i:number = 0; i <= this.generos.length; i++){
+            if(this.generos[i].getName() == gen.getName()){
+                this.generos.splice(i,1)
+                return
+            }
+        }
+        console.log("El genero no pertenece al artista")
+    }
+
+    delCanc(can:Cancion){
+        for(let i:number = 0; i <= this.canciones.length;i++){
+            if(this.canciones[i].getName() == can.getName()){
+                this.canciones.splice(i,1)
+                return
+            }
+        }
+        console.log("No se puede borrar la cancion porque no pertenece al artista")
+    }
+
+    delAlbum(alb:string){
+        for(let i:number = 0; i <= this.albumes.length;i++){
+            if(this.albumes[i] == alb){
+                this.albumes.splice(i,1)
+                return
+            }
+        }
+        console.log("No se puede borrar el grupo porque no pertenece al genero")
+    }
+}
+```
+
+### Playlist - Clase desarrollada por Daniel Arbelo y Carlos Pío Reyes
+
+Una playlist funcionará como una lista de reproducción de música de alguna plataforma digital como Spotify. Dentro de esta entidad se deberá incluir la información:
+
+1. Nombre de la playlist.
+2. Canciones incluidas dentro de la playlist.
+3. Duración en horas y minutos.
+
+La clase playlist es bastante simple, se le añade ademas de lo indicado en el enunciado un array de generos musicales para indicar los generos que tiene la playlist, y el creador de la playlist para despues al borrarla que solo pueda hacerlo el creador como se indica en la clase gestor y no cualquiera. En la parte de la duracion de la playlist, esta se calcula con las duraciones de las canciones que se añaden inicialmente, y en el metodo que añade una cancion al array de canciones, tambien modifica el tiempo sumando la duracion de la cancion a la que tiene la playlist en ese momento(Al borrar una playlist tambien se modifica la duracion restandole la duracion de la cancion).
+
+```Typescript
+class Playlist{
+
+    constructor(private nombre:string, private canciones:Cancion[], private duracion:number[], private generos:GeneroMusical[], private creador:string){
+        this.duracion.push(0)
+        this.duracion.push(0)
+        let seg:number = 0
+        for(let i:number = 0; i <= this.canciones.length; i++){
+            seg += this.canciones[i].getDuration()[1]
+            this.duracion[1] += this.canciones[i].getDuration()[0]
+            if(seg >= 60){
+                seg -= 60
+                this.duracion[1]++
+            }
+            if(this.duracion[1] >= 60){
+                this.duracion[1] -= 60
+                this.duracion[0]++
+            }
+
+        }
+        while(this.duracion[1] >= 60){
+            this.duracion[1] -= 60
+            this.duracion[0]++
+        }
+    }
+
+    getNombre():string{
+        return this.nombre;
+    }
+
+    getCanciones():Cancion[]{
+        return this.canciones;
+    }
+
+    getDuracion():number[]{
+        return this.duracion;
+    }
+
+    getGeneros():GeneroMusical[]{
+        return this.generos;
+    }
+
+    getCreador():string{
+        return this.creador
+    }
+
+    getReproducciones():number{
+        let result = 0
+        this.canciones.forEach(cancion => {
+            result += cancion.getRepro()
+        });
+        return result
+    }
+
+    setName(name:string){
+        this.nombre = name
+    }
+
+    addCancion(can:Cancion){
+        for(let i:number = 0; i <= this.canciones.length; i++){
+            if(this.generos[i].getName() == can.getName()){
+                console.log("La cancion ya esta añadida al artista")
+                return
+            }
+        }
+        this.canciones.push(can)
+        let seg:number = 0
+        seg += can.getDuration()[1]
+        this.duracion[1] += can.getDuration()[0]
+            if(seg >= 60){
+                seg -= 60
+                this.duracion[1]++
+            }
+            if(this.duracion[1] >= 60){
+                this.duracion[1] -= 60
+                this.duracion[0]++
+            }
+    }
+
+    addGenero(gen:GeneroMusical){
+        for(let i:number = 0; i <= this.generos.length; i++){
+            if(this.generos[i].getName() == gen.getName()){
+                console.log("El artista ya pertenece al genero")
+                return
+            }
+        }
+        this.generos.push(gen)
+    }
+
+    delGen(gen:GeneroMusical){
+        for(let i:number = 0; i <= this.generos.length; i++){
+            if(this.generos[i].getName() == gen.getName()){
+                this.generos.splice(i,1)
+                return
+            }
+        }
+        console.log("El genero no pertenece al artista")
+    }
+
+    delCanc(can:Cancion){
+        for(let i:number = 0; i <= this.canciones.length;i++){
+            if(this.canciones[i].getName() == can.getName()){
+                this.canciones.splice(i,1)
+                this.duracion[1] -= can.getDuration()[0]
+                if(this.duracion[1] < 0){
+                    this.duracion[1] += 60
+                    this.duracion[0] --
+                }
+                return
+            }
+        }
+        console.log("No se puede borrar la cancion porque no pertenece al artista")
+    }
+}
+```

@@ -15,7 +15,7 @@ export class Playlist{
     constructor(private nombre:string, private canciones:Cancion[], private duracion:number[], private generos:GeneroMusical[], private creador:string){
         this.duracion.push(0)
         this.duracion.push(0)
-        let seg:number 
+        let seg:number = 0
         for(let i:number = 0; i <= this.canciones.length; i++){
             seg += this.canciones[i].getDuration()[1]
             this.duracion[1] += this.canciones[i].getDuration()[0]
@@ -90,27 +90,38 @@ export class Playlist{
     }
 
     /**
-     * 
-     * @param can 
+     * metodo que añade una cancion al array de canciones(tambien modifica la duracion de la playlist)
+     * @param can cancion que va a ser añadida
      */
     addCancion(can:Cancion){
         for(let i:number = 0; i <= this.canciones.length; i++){
             if(this.generos[i].getName() == can.getName()){
-                console.log("La cancion ya esta añadida al artista")
+                console.log("La cancion ya esta añadida a la playlist")
                 return
             }
         }
         this.canciones.push(can)
+        let seg:number = 0
+        seg += can.getDuration()[1]
+        this.duracion[1] += can.getDuration()[0]
+            if(seg >= 60){
+                seg -= 60
+                this.duracion[1]++
+            }
+            if(this.duracion[1] >= 60){
+                this.duracion[1] -= 60
+                this.duracion[0]++
+            }
     }
 
     /**
-     * 
-     * @param gen 
+     * metodo que añade un genero musical al array de generos
+     * @param gen genero que va a ser añadido
      */
     addGenero(gen:GeneroMusical){
         for(let i:number = 0; i <= this.generos.length; i++){
             if(this.generos[i].getName() == gen.getName()){
-                console.log("El artista ya pertenece al genero")
+                console.log("La playlist ya pertenece al genero")
                 return
             }
         }
@@ -118,8 +129,8 @@ export class Playlist{
     }
 
     /**
-     * 
-     * @param gen 
+     * metodo que borra un genero musical del array de generos
+     * @param gen genero que va a ser borrado
      */
     delGen(gen:GeneroMusical){
         for(let i:number = 0; i <= this.generos.length; i++){
@@ -128,20 +139,25 @@ export class Playlist{
                 return
             }
         }
-        console.log("El genero no pertenece al artista")
+        console.log("El genero no pertenece a la playlist")
     }
 
     /**
-     * 
-     * @param can 
+     * metodo que borra la cancion indicada del array de canciones(tambien modifica la duracion total de la playlist)
+     * @param can cancion que se va a borrar
      */
     delCanc(can:Cancion){
         for(let i:number = 0; i <= this.canciones.length;i++){
             if(this.canciones[i].getName() == can.getName()){
                 this.canciones.splice(i,1)
+                this.duracion[1] -= can.getDuration()[0]
+                if(this.duracion[1] < 0){
+                    this.duracion[1] += 60
+                    this.duracion[0] --
+                }
                 return
             }
         }
-        console.log("No se puede borrar la cancion porque no pertenece al artista")
+        console.log("No se puede borrar la cancion porque no pertenece a la playlist")
     }
 }
