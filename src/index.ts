@@ -37,29 +37,214 @@ enum Commands {
     imprimirCancionGrupo = "Imprimir canciones pertenecientes a un grupo",
     imprimirAlbumArtista = "Imprimir Albumes pertenecientes a un artista",
     imprimirAlbumGrupo = "Imprimir Albumes pertenecientes a un grupo",
+    imprimirPlaylistArtista = "Imprimir Playlist pertenecientes a un artista",
+    imprimirPlaylistGrupo = "Imprimir Playlist pertenecientes a un grupo",
     Quit = "Salir"
 }
+
+enum Playlists {
+    a = "Alfabetico",
+    g = "Genero", 
+    r = "Reproducciones" 
+}
+
+enum Albumes {
+    a = "Alfabetico",
+    g = "Genero",
+    y = "Año de Lanzamiento"
+}
+
+enum Canciones {
+    a = "Alfabetico",
+    g = "Genero",
+    r = "Reproducciones",
+    s = "Single"
+} 
+
+function promptCaArt():void{
+    let cancion: Cancion[] = []
+    console.clear()
+    var inquirer = require('inquirer')
+    inquirer.prompt({type: "input", name: "artista", message:"Nombre del artista"})
+        .then(answers => {
+            cancion = libreria.BuscarCancionesdeAutor(answers["artista"])
+            inquirer.prompt({type: "list",name: "orden", message: "¿Como quieres ordenar las canciones?",choices: Object.values(Canciones)})
+                .then(answers => {switch(answers["orden"]){
+                        case Canciones.a:
+                            inquirer.prompt({type:"confirm", name:"ascendente", message:"¿En orden ascendente o descendente?", default:"true"})
+                                .then(answers =>{libreria.imprimirCancionesAlfabeticamente(cancion,answers["ascendente"])})
+                            promptUser()
+                        break
+                        case Canciones.g:
+                            inquirer.prompt({type:"input", name: "genero", message:"¿Genero para filtrar?"})
+                                .then(answers => {libreria.imprimirCancionesPorGenero(cancion,answers["genero"])})
+                            promptUser()
+                        break
+                        case Canciones.r:
+                            inquirer.prompt({type:"confirm", name:"ascendente", message:"¿En orden ascendente o descendente?", default:"true"})
+                            .then(answers =>{libreria.imprimirCancionesPorReproducciones(cancion,answers["ascendente"])})
+                        promptUser()
+                        break
+                        case Canciones.s:
+                            libreria.imprimirSingles(cancion)
+                        promptUser()
+                        break
+                    }
+                })
+        })
+    promptUser()
+}
+
+function promptCaGru():void{
+    let cancion: Cancion[] = []
+    console.clear()
+    var inquirer = require('inquirer')
+    inquirer.prompt({type: "input", name: "grupo", message:"Nombre del grupo"})
+        .then(answers => {
+            cancion = libreria.BuscarCancionesdeAutor(answers["grupo"])
+            inquirer.prompt({type: "list",name: "orden", message: "¿Como quieres ordenar las canciones?",choices: Object.values(Canciones)})
+                .then(answers => {switch(answers["orden"]){
+                        case Canciones.a:
+                            inquirer.prompt({type:"confirm", name:"ascendente", message:"¿En orden ascendente o descendente?", default:"true"})
+                                .then(answers =>{libreria.imprimirCancionesAlfabeticamente(cancion,answers["ascendente"])})
+                            promptUser()
+                        break
+                        case Canciones.g:
+                            inquirer.prompt({type:"input", name: "genero", message:"¿Genero para filtrar?"})
+                                .then(answers => {libreria.imprimirCancionesPorGenero(cancion,answers["genero"])})
+                            promptUser()
+                        break
+                        case Canciones.r:
+                            inquirer.prompt({type:"confirm", name:"ascendente", message:"¿En orden ascendente o descendente?", default:"true"})
+                            .then(answers =>{libreria.imprimirCancionesPorReproducciones(cancion,answers["ascendente"])})
+                        promptUser()
+                        break
+                        case Canciones.s:
+                            libreria.imprimirSingles(cancion)
+                        promptUser()
+                        break
+                    }
+                })
+        })
+    promptUser()
+}
+
+function promptAlArt():void{
+    let album: Album[] = []
+    console.clear()
+    var inquirer = require('inquirer')
+    inquirer.prompt({type: "input", name: "artista", message:"Nombre del artista"})
+        .then(answers => {
+            album = libreria.BuscarAlbumesPorArtista(answers["artista"])
+            inquirer.prompt({type: "list",name: "orden", message: "¿Como quieres ordenar el album?",choices: Object.values(Albumes)})
+                .then(answers => {switch(answers["orden"]){
+                        case Albumes.a:
+                            inquirer.prompt({type:"confirm", name:"ascendente", message:"¿En orden ascendente o descendente?", default:"true"})
+                                .then(answers =>{libreria.imprimirAlbumesAlfabeticamente(album,answers["ascendente"])})
+                            promptUser()
+                        break
+                        case Albumes.g:
+                            inquirer.prompt({type:"input", name: "genero", message:"¿Genero para filtrar?"})
+                                .then(answers => {libreria.imprimirAlbumesPorGenero(album,answers["genero"])})
+                            promptUser()
+                        break
+                        case Albumes.y:
+                            inquirer.prompt({type:"confirm", name:"ascendente", message:"¿En orden ascendente o descendente?", default:"true"})
+                            .then(answers =>{libreria.imprimirAlbumesPorAño(album,answers["ascendente"])})
+                        promptUser()
+                    break
+                    }
+                })
+        })
+    promptUser()
+}
+
+function promptAlGru():void{
+    let album: Album[] = []
+    console.clear()
+    var inquirer = require('inquirer')
+    inquirer.prompt({type: "input", name: "grupo", message:"Nombre del grupo"})
+        .then(answers => {
+            album = libreria.BuscarAlbumesPorArtista(answers["grupo"])
+            inquirer.prompt({type: "list",name: "orden", message: "¿Como quieres ordenar el album?",choices: Object.values(Albumes)})
+                .then(answers => {switch(answers["orden"]){
+                        case Albumes.a:
+                            inquirer.prompt({type:"confirm", name:"ascendente", message:"¿En orden ascendente o descendente?", default:"true"})
+                                .then(answers =>{libreria.imprimirAlbumesAlfabeticamente(album,answers["ascendente"])})
+                            promptUser()
+                        break
+                        case Albumes.g:
+                            inquirer.prompt({type:"input", name: "genero", message:"¿Genero para filtrar?"})
+                                .then(answers => {libreria.imprimirAlbumesPorGenero(album,answers["genero"])})
+                            promptUser()
+                        break
+                        case Albumes.y:
+                            inquirer.prompt({type:"confirm", name:"ascendente", message:"¿En orden ascendente o descendente?", default:"true"})
+                            .then(answers =>{libreria.imprimirAlbumesPorAño(album,answers["ascendente"])})
+                        promptUser()
+                    break
+                    }
+                })
+        })
+    promptUser()
+}
+
+function promptPlArt():void{
+    let playlist: Playlist[] = []
+    console.clear()
+    var inquirer = require('inquirer')
+    inquirer.prompt({type: "input", name: "artista", message:"Nombre del artista"})
+        .then(answers => {
+            playlist = libreria.BuscarPlaylistPorArtista(answers["artista"])
+            inquirer.prompt({type: "list",name: "orden", message: "¿Como quieres ordenar la Playlist?",choices: Object.values(Playlists)})
+                .then(answers => {switch(answers["orden"]){
+                        case Playlists.a:
+                            inquirer.prompt({type:"confirm", name:"ascendente", message:"¿En orden ascendente o descendente?", default:"true"})
+                                .then(answers =>{libreria.imprimirPlaylistAlfabeticamente(playlist,answers["ascendente"])})
+                            promptUser()
+                        break
+                        case Playlists.g:
+                            inquirer.prompt({type:"input", name: "genero", message:"¿Genero para filtrar?"})
+                                .then(answers => {libreria.imprimirPlaylistPorGenero(playlist,answers["genero"])})
+                            promptUser()
+                        break
+                        case Playlists.r:
+                            inquirer.prompt({type:"confirm", name:"ascendente", message:"¿En orden ascendente o descendente?", default:"true"})
+                                .then(answers =>{libreria.imprimirPlaylistPorReproducciones(playlist,answers["ascendente"])})
+                        promptUser()
+                    break
+                    }
+                })
+        })
+    promptUser()
+}
+
 function promptPlGru():void{
     let playlist: Playlist[] = []
     console.clear()
     var inquirer = require('inquirer')
     inquirer.prompt({type: "input", name: "grupo", message:"Nombre del grupo"})
         .then(answers => {
-            playlist = libreria.BuscarPlaylistPorArtista(answers)
-            inquirer.prompt({   type: "list",
-                            name: "orden", 
-                            message: "¿Como quieres ordenar la Playlist?",
-                            choices:[
-                            {name:"Alfabetico", value:"a"},
-                            {name:"Genero", value:"g"},
-                            {name:"Reproducciones", value: "r"}
-                            ],
-                        })
-                        .then(answers => {switch(answers){
-                                case "a":
-                                 inquirer.prompt({type:})   
-                            }
-                        })
+            playlist = libreria.BuscarPlaylistPorArtista(answers["grupo"])
+            inquirer.prompt({type: "list",name: "orden", message: "¿Como quieres ordenar la Playlist?",choices: Object.values(Playlists)})
+                .then(answers => {switch(answers["orden"]){
+                        case Playlists.a:
+                            inquirer.prompt({type:"confirm", name:"ascendente", message:"¿En orden ascendente o descendente?", default:"true"})
+                                .then(answers =>{libreria.imprimirPlaylistAlfabeticamente(playlist,answers["ascendente"])})
+                            promptUser()
+                        break
+                        case Playlists.g:
+                            inquirer.prompt({type:"input", name: "genero", message:"¿Genero para filtrar?"})
+                                .then(answers => {libreria.imprimirPlaylistPorGenero(playlist,answers["genero"])})
+                            promptUser()
+                        break
+                        case Playlists.r:
+                            inquirer.prompt({type:"confirm", name:"ascendente", message:"¿En orden ascendente o descendente?", default:"true"})
+                            .then(answers =>{libreria.imprimirPlaylistPorReproducciones(playlist,answers["ascendente"])})
+                        promptUser()
+                    break
+                    }
+                })
         })
     promptUser()
 }
@@ -76,18 +261,18 @@ async function promptUser() {
     });
 
     switch (answers["comand"]) {
-        case Commands.addElemento:
-            promptAdd();
-            promptUser();
-            break;
-        case Commands.rmElemento:
-            promptRm();
-            promptUser();
-            break;
-        case Commands.modifyElemento:
-            promptMd();
-            promptUser();
-            break;
+        // case Commands.addElemento:
+        //     promptAdd();
+        //     promptUser();
+        //     break;
+        // case Commands.rmElemento:
+        //     promptRm();
+        //     promptUser();
+        //     break;
+        // case Commands.modifyElemento:
+        //     promptMd();
+        //     promptUser();
+        //     break;
         case Commands.imprimirCancionArtista:
             promptCaArt();
             promptUser();
@@ -104,6 +289,14 @@ async function promptUser() {
             promptAlGru();
             promptUser();
             break; 
+        case Commands.imprimirAlbumGrupo:
+            promptPlArt();
+            promptUser();
+        break;
+        case Commands.imprimirAlbumGrupo:
+            promptPlGru();
+            promptUser();
+        break;
         default:
             break;
     }

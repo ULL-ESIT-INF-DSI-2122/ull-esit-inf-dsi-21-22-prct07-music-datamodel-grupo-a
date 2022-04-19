@@ -149,12 +149,12 @@ export class Libreria{
         console.table(albumes);
     }
 
-    imprimirAlbumesPorGenero(genero:GeneroMusical){
+    imprimirAlbumesPorGenero(albumes:Album[], genero:GeneroMusical){
         let sol:Album[] = [];
         
-        for(let i:number = 0; i <= this.albumes.length;i++){
-            if(this.albumes[i].getGenre().find(item => item === genero) != undefined ){
-                sol.push(this.albumes[i]);
+        for(let i:number = 0; i <= albumes.length;i++){
+            if(albumes[i].getGenre().find(item => item === genero) != undefined ){
+                sol.push(albumes[i]);
             }
             
         }
